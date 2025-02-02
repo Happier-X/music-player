@@ -1,13 +1,21 @@
 <template>
     <div class="w-screen h-screen">
         <div class="flex h-[calc(100vh-80px)] w-full">
-            <SideBar></SideBar>
+            <div>
+                <SideBar></SideBar>
+            </div>
             <div class="w-[calc(100%-224px)] h-full">
-                <TopBar></TopBar>
-                <RouterView></RouterView>
+                <div>
+                    <TopBar></TopBar>
+                </div>
+                <div>
+                    <RouterView></RouterView>
+                </div>
             </div>
         </div>
-        <PlayBar></PlayBar>
+        <div>
+            <PlayBar></PlayBar>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
