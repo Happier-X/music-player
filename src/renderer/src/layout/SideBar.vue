@@ -15,6 +15,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 const route = useRoute()
+// 菜单列表
 const menuList = [
     {
         name: '歌曲',
