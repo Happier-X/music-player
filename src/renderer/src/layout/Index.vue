@@ -1,6 +1,6 @@
 <template>
     <div class="w-screen h-screen">
-        <div class="flex h-[calc(100vh-80px)] w-full">
+        <div class="flex h-[calc(100%-80px)] w-full">
             <div>
                 <SideBar></SideBar>
             </div>
