@@ -1,5 +1,6 @@
 <template>
     <div class="bg-white w-full h-[2.5rem] flex justify-end">
+        <n-button type="error">Error</n-button>
         <button class="btn btn-square">
             <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -5,10 +5,10 @@
                 <SideBar></SideBar>
             </div>
             <div class="w-[calc(100%-224px)] h-full">
-                <div>
+                <div class="w-full">
                     <TopBar></TopBar>
                 </div>
-                <div>
+                <div class="w-full h-[calc(100%-24px)]">
                     <RouterView></RouterView>
                 </div>
             </div>
