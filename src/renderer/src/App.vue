@@ -2,5 +2,5 @@
     <Layout />
 </template>
 <script setup lang="ts">
-import Layout from './layout/Index.vue'
+import Layout from './views/layout/Index.vue'
 </script>

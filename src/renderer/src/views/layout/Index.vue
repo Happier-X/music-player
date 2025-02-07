@@ -20,7 +20,7 @@
 </template>
 <script setup lang="ts">
 import SideBar from './SideBar.vue'
-import TopBar from './TopBar.vue'
+import TopBar from './topBar/Index.vue'
 import PlayBar from './PlayBar.vue'
 </script>
 <style scoped lang="scss">
