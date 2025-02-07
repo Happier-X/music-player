@@ -1,19 +1,19 @@
 <template>
-    <div class="w-screen h-screen">
-        <div class="flex h-[calc(100%-80px)] w-full">
-            <div>
+    <div class="layout-container">
+        <div class="side-main-container">
+            <div class="side-container">
                 <SideBar></SideBar>
             </div>
-            <div class="w-[calc(100%-224px)] h-full">
-                <div class="w-full">
+            <div class="main-container">
+                <div class="top-container">
                     <TopBar></TopBar>
                 </div>
-                <div class="w-full h-[calc(100%-24px)]">
+                <div class="content-container">
                     <RouterView></RouterView>
                 </div>
             </div>
         </div>
-        <div>
+        <div class="play-bar-container">
             <PlayBar></PlayBar>
         </div>
     </div>
@@ -23,4 +23,34 @@ import SideBar from './SideBar.vue'
 import TopBar from './TopBar.vue'
 import PlayBar from './PlayBar.vue'
 </script>
-<style scoped></style>
+<style scoped lang="scss">
+.layout-container {
+    width: 100vw;
+    height: 100vh;
+    .side-main-container {
+        width: 100%;
+        height: calc(100% - 75px);
+        background-color: #f7f9fc;
+        display: flex;
+        .side-container {
+            width: 200px;
+            height: 100%;
+            background-color: #f0f3f6;
+        }
+        .main-container {
+            width: calc(100% - 200px);
+            height: 100%;
+            background-color: skyblue;
+            .top-container {
+            }
+            .content-container {
+            }
+        }
+    }
+    .play-bar-container {
+        width: 100%;
+        height: 75px;
+        background-color: #fafafa;
+    }
+}
+</style>
