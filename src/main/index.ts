@@ -10,7 +10,7 @@ function createWindow(): void {
         height: 690,
         show: false,
         autoHideMenuBar: true,
-        frame: false, // 去掉窗口边框和顶部按钮
+        frame: false, // 移除窗口边框和顶部按钮
         ...(process.platform === 'linux' ? { icon } : {}),
         webPreferences: {
             preload: join(__dirname, '../preload/index.js'),
