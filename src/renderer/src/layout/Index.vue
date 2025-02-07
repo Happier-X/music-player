@@ -40,10 +40,15 @@ import PlayBar from './PlayBar.vue'
         .main-container {
             width: calc(100% - 200px);
             height: 100%;
-            background-color: skyblue;
             .top-container {
+                width: 100%;
+                height: 60px;
+                background-color: orange;
             }
             .content-container {
+                width: 100%;
+                height: calc(100% - 60px);
+                background-color: skyblue;
             }
         }
     }

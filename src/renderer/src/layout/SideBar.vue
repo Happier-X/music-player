@@ -1,5 +1,5 @@
 <template>
-    <div class="w-56 h-full">
+    <div>
         <ul class="menu menu-xl bg-base-200 rounded-box w-56 h-full gap-2">
             <li class="menu-title text-xl">音乐播放器</li>
             <li v-for="(item, index) in menuList" :key="index">
