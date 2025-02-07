@@ -43,7 +43,6 @@ import PlayBar from './PlayBar.vue'
             .top-container {
                 width: 100%;
                 height: 60px;
-                background-color: orange;
             }
             .content-container {
                 width: 100%;
