@@ -10,6 +10,18 @@ const api = {
     // 最小化窗口
     minimizeWindow: () => {
         ipcRenderer.send('minimize-window')
+    },
+    // 全屏
+    handleFullScreen: () => {
+        ipcRenderer.send('handle-full-screen')
+    },
+    // 退出全屏
+    exitFullScreen: () => {
+        ipcRenderer.send('exit-full-screen')
+    },
+    // 判断是否全屏
+    isFullScreen: () => {
+        return ipcRenderer.invoke('is-full-screen')
     }
 }
 

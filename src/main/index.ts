@@ -53,14 +53,36 @@ app.whenReady().then(() => {
     })
 
     // IPC
+    /**
+     * 关闭窗口
+     */
     ipcMain.on('close-window', () => {
         mainWindow?.close()
     })
-
+    /**
+     * 最小化窗口
+     */
     ipcMain.on('minimize-window', () => {
         mainWindow?.minimize()
     })
-
+    /**
+     * 判断是否全屏
+     */
+    ipcMain.handle('is-full-screen', () => {
+        return mainWindow?.isFullScreen()
+    })
+    /**
+     * 全屏
+     */
+    ipcMain.on('handle-full-screen', () => {
+        mainWindow?.setFullScreen(true)
+    })
+    /**
+     * 退出全屏
+     */
+    ipcMain.on('exit-full-screen', () => {
+        mainWindow?.setFullScreen(false)
+    })
 
     createWindow()
 

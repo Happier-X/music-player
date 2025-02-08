@@ -8,11 +8,16 @@
                     class="icon-button"
                     @click="handleSwitchFullScreen">
                     <n-icon size="20" color="#000000">
-                        <RiFullscreenLine></RiFullscreenLine>
+                        <component
+                            :is="
+                                isFullScreen
+                                    ? RiFullscreenExitLine
+                                    : RiFullscreenLine
+                            " />
                     </n-icon>
                 </n-button>
             </template>
-            全屏
+            {{ isFullScreen ? '退出全屏' : '全屏' }}
         </n-tooltip>
         <n-tooltip :show-arrow="false" trigger="hover" :delay="500">
             <template #trigger>
@@ -67,11 +72,23 @@ import {
     RiCheckboxMultipleBlankLine,
     RiCloseLine
 } from '@remixicon/vue'
+import { ref } from 'vue'
+// 是否全屏
+const isFullScreen = ref(false)
 /**
  * 切换全屏
  */
-function handleSwitchFullScreen() {}
+async function handleSwitchFullScreen() {
+    isFullScreen.value = await window.api.isFullScreen()
+    if (isFullScreen.value) {
+        window.api.exitFullScreen()
+    } else {
+        window.api.handleFullScreen()
+    }
+    isFullScreen.value = !isFullScreen.value
+}
 /**
+
  * 最小化
  */
 function handleMinimize() {

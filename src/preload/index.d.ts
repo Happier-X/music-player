@@ -12,6 +12,18 @@ declare global {
              * 最小化窗口
              */
             minimizeWindow: () => void
+            /**
+             * 全屏
+             */
+            handleFullScreen: () => void
+            /**
+             * 退出全屏
+             */
+            exitFullScreen: () => void
+            /**
+             * 判断是否全屏
+             */
+            isFullScreen: () => Promise<boolean>
         }
     }
 }
