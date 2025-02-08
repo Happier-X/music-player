@@ -26,7 +26,7 @@
                     color="transparent"
                     class="icon-button"
                     @click="handleMinimize">
-                    <n-icon size="20" color="#000000">
+                    <n-icon size="25" color="#000000">
                         <RiSubtractLine></RiSubtractLine>
                     </n-icon>
                 </n-button>
@@ -54,7 +54,7 @@
                     color="transparent"
                     class="icon-button"
                     @click="handleClose">
-                    <n-icon size="20" color="#000000">
+                    <n-icon size="25" color="#000000">
                         <RiCloseLine></RiCloseLine>
                     </n-icon>
                 </n-button>
@@ -111,6 +111,8 @@ function handleClose() {
 .button-group-container {
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
     .icon-button {
         &:hover {
             color: black;
