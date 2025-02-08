@@ -70,14 +70,12 @@ import {
 /**
  * 切换全屏
  */
-function handleSwitchFullScreen() {
-    alert('111')
-}
+function handleSwitchFullScreen() {}
 /**
  * 最小化
  */
 function handleMinimize() {
-    alert('222')
+    window.api.minimizeWindow()
 }
 /**
  * 切换屏幕大小
@@ -89,7 +87,7 @@ function handleSwitchScreenSize() {
  * 关闭
  */
 function handleClose() {
-    alert('444')
+    window.api.closeWindow()
 }
 </script>
 <style scoped lang="scss">

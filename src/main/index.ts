@@ -3,9 +3,11 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
+let mainWindow: BrowserWindow | null = null
+
 function createWindow(): void {
     // Create the browser window.
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         width: 1024,
         height: 690,
         show: false,
@@ -19,7 +21,7 @@ function createWindow(): void {
     })
 
     mainWindow.on('ready-to-show', () => {
-        mainWindow.show()
+        mainWindow?.show()
     })
 
     mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -50,8 +52,15 @@ app.whenReady().then(() => {
         optimizer.watchWindowShortcuts(window)
     })
 
-    // IPC test
-    ipcMain.on('ping', () => console.log('pong'))
+    // IPC
+    ipcMain.on('close-window', () => {
+        mainWindow?.close()
+    })
+
+    ipcMain.on('minimize-window', () => {
+        mainWindow?.minimize()
+    })
+
 
     createWindow()
 
