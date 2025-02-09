@@ -83,6 +83,24 @@ app.whenReady().then(() => {
     ipcMain.on('exit-full-screen', () => {
         mainWindow?.setFullScreen(false)
     })
+    /**
+     * 判断是否最大化
+     */
+    ipcMain.handle('is-maximized', () => {
+        return mainWindow?.isMaximized()
+    })
+    /**
+     * 最大化
+     */
+    ipcMain.on('maximize', () => {
+        mainWindow?.maximize()
+    })
+    /**
+     * 还原
+     */
+    ipcMain.on('unmaximize', () => {
+        mainWindow?.unmaximize()
+    })
 
     createWindow()
 

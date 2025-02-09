@@ -3,25 +3,53 @@ import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
 const api = {
-    // 关闭窗口
+    /**
+     * 关闭窗口
+     */
     closeWindow: () => {
         ipcRenderer.send('close-window')
     },
-    // 最小化窗口
+    /**
+     * 最小化窗口
+     */
     minimizeWindow: () => {
         ipcRenderer.send('minimize-window')
     },
-    // 全屏
+    /**
+     * 全屏
+     */
     handleFullScreen: () => {
         ipcRenderer.send('handle-full-screen')
     },
-    // 退出全屏
+    /**
+     * 退出全屏
+     */
     exitFullScreen: () => {
         ipcRenderer.send('exit-full-screen')
     },
-    // 判断是否全屏
+    /**
+     * 判断是否全屏
+     */
     isFullScreen: () => {
         return ipcRenderer.invoke('is-full-screen')
+    },
+    /**
+     * 判断是否最大化
+     */
+    isMaximized: () => {
+        return ipcRenderer.invoke('is-maximized')
+    },
+    /**
+     * 最大化
+     */
+    maximize: () => {
+        ipcRenderer.send('maximize')
+    },
+    /**
+     * 还原
+     */
+    unmaximize: () => {
+        ipcRenderer.send('unmaximize')
     }
 }
 

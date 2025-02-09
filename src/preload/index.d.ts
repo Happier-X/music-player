@@ -24,6 +24,18 @@ declare global {
              * 判断是否全屏
              */
             isFullScreen: () => Promise<boolean>
+            /**
+             * 判断是否最大化
+             */
+            isMaximized: () => Promise<boolean>
+            /**
+             * 最大化
+             */
+            maximize: () => void
+            /**
+             * 还原
+             */
+            unmaximize: () => void
         }
     }
 }

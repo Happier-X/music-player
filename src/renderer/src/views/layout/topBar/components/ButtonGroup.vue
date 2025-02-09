@@ -1,6 +1,6 @@
 <template>
     <div class="button-group-container">
-        <n-tooltip :show-arrow="false" trigger="hover" :delay="500">
+        <n-tooltip :show-arrow="false" trigger="hover" :delay="800">
             <template #trigger>
                 <n-button
                     circle
@@ -19,7 +19,7 @@
             </template>
             {{ isFullScreen ? '退出全屏' : '全屏' }}
         </n-tooltip>
-        <n-tooltip :show-arrow="false" trigger="hover" :delay="500">
+        <n-tooltip :show-arrow="false" trigger="hover" :delay="800">
             <template #trigger>
                 <n-button
                     circle
@@ -33,7 +33,7 @@
             </template>
             最小化
         </n-tooltip>
-        <n-tooltip :show-arrow="false" trigger="hover" :delay="500">
+        <n-tooltip :show-arrow="false" trigger="hover" :delay="800">
             <template #trigger>
                 <n-button
                     circle
@@ -41,13 +41,18 @@
                     class="icon-button"
                     @click="handleSwitchScreenSize">
                     <n-icon size="20" color="#000000">
-                        <RiCheckboxBlankLine></RiCheckboxBlankLine>
+                        <component
+                            :is="
+                                isMaximized
+                                    ? RiCheckboxMultipleBlankLine
+                                    : RiCheckboxBlankLine
+                            " />
                     </n-icon>
                 </n-button>
             </template>
-            最大化
+            {{ isMaximized ? '最小化' : '最大化' }}
         </n-tooltip>
-        <n-tooltip :show-arrow="false" trigger="hover" :delay="500">
+        <n-tooltip :show-arrow="false" trigger="hover" :delay="800">
             <template #trigger>
                 <n-button
                     circle
@@ -72,14 +77,19 @@ import {
     RiCheckboxMultipleBlankLine,
     RiCloseLine
 } from '@remixicon/vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 // 是否全屏
 const isFullScreen = ref(false)
+// 是否最大化
+const isMaximized = ref(false)
+onMounted(async () => {
+    isMaximized.value = await window.api.isMaximized()
+    isFullScreen.value = await window.api.isFullScreen()
+})
 /**
  * 切换全屏
  */
-async function handleSwitchFullScreen() {
-    isFullScreen.value = await window.api.isFullScreen()
+function handleSwitchFullScreen() {
     if (isFullScreen.value) {
         window.api.exitFullScreen()
     } else {
@@ -88,7 +98,6 @@ async function handleSwitchFullScreen() {
     isFullScreen.value = !isFullScreen.value
 }
 /**
-
  * 最小化
  */
 function handleMinimize() {
@@ -98,7 +107,12 @@ function handleMinimize() {
  * 切换屏幕大小
  */
 function handleSwitchScreenSize() {
-    alert('333')
+    if (isMaximized.value) {
+        window.api.unmaximize()
+    } else {
+        window.api.maximize()
+    }
+    isMaximized.value = !isMaximized.value
 }
 /**
  * 关闭
