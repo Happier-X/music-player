@@ -1,9 +1,9 @@
 <template>
     <div class="top-bar-container">
-        <div class="nav-search-bar">
+        <div class="nav-bar-container">
             <NavBar></NavBar>
         </div>
-        <div class="button-group">
+        <div class="button-group-container">
             <ButtonGroup></ButtonGroup>
         </div>
     </div>
@@ -20,5 +20,13 @@ import ButtonGroup from './components/ButtonGroup.vue'
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .nav-bar-container {
+        width: 100%;
+        height: 100%;
+    }
+    .button-group-container {
+        width: 100%;
+        height: 100%;
+    }
 }
 </style>

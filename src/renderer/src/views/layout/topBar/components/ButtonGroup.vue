@@ -127,6 +127,7 @@ function handleClose() {
     height: 100%;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     .icon-button {
         &:hover {
             color: black;

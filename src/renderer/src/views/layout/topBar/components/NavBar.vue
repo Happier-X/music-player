@@ -64,6 +64,11 @@ watch(route, () => {
 </script>
 <style scoped lang="scss">
 .nav-bar-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     .icon-button {
         &:hover {
             color: black;
