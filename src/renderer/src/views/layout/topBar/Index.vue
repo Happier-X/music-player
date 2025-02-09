@@ -2,7 +2,6 @@
     <div class="top-bar-container">
         <div class="nav-search-bar">
             <NavBar></NavBar>
-            <SearchBar></SearchBar>
         </div>
         <div class="button-group">
             <ButtonGroup></ButtonGroup>
@@ -11,7 +10,6 @@
 </template>
 <script setup lang="ts">
 import NavBar from './components/NavBar.vue'
-import SearchBar from './components/SearchBar.vue'
 import ButtonGroup from './components/ButtonGroup.vue'
 </script>
 <style scoped lang="scss">
