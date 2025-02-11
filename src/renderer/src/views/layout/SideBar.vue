@@ -1,54 +1,123 @@
 <template>
-    <div>
-        <ul class="menu menu-xl bg-base-200 rounded-box w-56 h-full gap-2">
-            <li class="menu-title text-xl">音乐播放器</li>
-            <li v-for="(item, index) in menuList" :key="index">
-                <RouterLink
-                    :to="item.path"
-                    :class="route.path === item.path ? 'menu-active' : ''">
-                    <component :is="item.svg"></component>
-                    {{ item.name }}
-                </RouterLink>
-            </li>
-        </ul>
+    <div class="side-bar-container">
+        <div class="logo">音乐播放器</div>
+        <n-menu v-model:value="activeKey" :options="menuOptions" />
     </div>
 </template>
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
 import {
-    RiAlbumFill,
-    RiFileList2Fill,
-    RiMusicFill,
-    RiSettings4Fill,
-    RiUserFill
+    RiAlbumFill as AlbumIcon,
+    RiFileList2Fill as SongListIcon,
+    RiMusicFill as MusicIcon,
+    RiSettings4Fill as SettingsIcon,
+    RiUserFill as ArtistIcon
 } from '@remixicon/vue'
-const route = useRoute()
-// 菜单列表
-const menuList = [
+import type { MenuOption } from 'naive-ui'
+import { NIcon } from 'naive-ui'
+import type { Component } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
+import { h, ref, watch } from 'vue'
+/**
+ * 渲染图标
+ */
+function renderIcon(icon: Component) {
+    return () => h(NIcon, null, { default: () => h(icon) })
+}
+// 菜单配置
+const menuOptions: MenuOption[] = [
     {
-        name: '歌曲',
-        path: '/songs',
-        svg: RiMusicFill
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        path: '/songs'
+                    }
+                },
+                {
+                    default: () => '歌曲'
+                }
+            ),
+        key: 'songs',
+        icon: renderIcon(MusicIcon)
     },
     {
-        name: '专辑',
-        path: '/album',
-        svg: RiAlbumFill
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        path: '/album'
+                    }
+                },
+                {
+                    default: () => '专辑'
+                }
+            ),
+        key: 'album',
+        icon: renderIcon(AlbumIcon)
     },
     {
-        name: '艺术家',
-        path: '/artist',
-        svg: RiUserFill
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        path: '/artist'
+                    }
+                },
+                {
+                    default: () => '歌手'
+                }
+            ),
+        key: 'artist',
+        icon: renderIcon(ArtistIcon)
     },
     {
-        name: '歌单',
-        path: '/songList',
-        svg: RiFileList2Fill
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        path: '/songList'
+                    }
+                },
+                {
+                    default: () => '歌单'
+                }
+            ),
+        key: 'songList',
+        icon: renderIcon(SongListIcon)
     },
     {
-        name: '设置',
-        path: '/settings',
-        svg: RiSettings4Fill
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        path: '/settings'
+                    }
+                },
+                {
+                    default: () => '设置'
+                }
+            ),
+        key: 'settings',
+        icon: renderIcon(SettingsIcon)
     }
 ]
+// 当前选中的菜单
+const activeKey = ref('songs')
+// 路由对象
+const route = useRoute()
+watch(route, () => {
+    activeKey.value = route.path.split('/')[1]
+})
 </script>
+<style lang="scss" scoped>
+.side-bar-container {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+</style>

@@ -35,7 +35,6 @@ import PlayBar from './PlayBar.vue'
         .side-container {
             width: 200px;
             height: 100%;
-            background-color: #f0f3f6;
         }
         .main-container {
             width: calc(100% - 200px);
