@@ -78,6 +78,7 @@ import {
     RiCloseLine
 } from '@remixicon/vue'
 import { onMounted, ref } from 'vue'
+import { NTooltip, NButton, NIcon } from 'naive-ui'
 // 是否全屏
 const isFullScreen = ref(false)
 // 是否最大化

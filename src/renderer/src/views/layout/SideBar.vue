@@ -13,7 +13,7 @@ import {
     RiUserFill as ArtistIcon
 } from '@remixicon/vue'
 import type { MenuOption } from 'naive-ui'
-import { NIcon } from 'naive-ui'
+import { NIcon, NMenu } from 'naive-ui'
 import type { Component } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { h, ref, watch } from 'vue'
@@ -119,5 +119,11 @@ watch(route, () => {
     width: 100%;
     height: 100%;
     padding: 10px;
+    .logo {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: center;
+    }
 }
 </style>

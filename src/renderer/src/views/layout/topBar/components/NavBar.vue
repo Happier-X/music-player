@@ -36,6 +36,7 @@
 import { RiArrowLeftSLine, RiArrowRightSLine } from '@remixicon/vue'
 import { ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { NTooltip, NButton, NIcon } from 'naive-ui'
 // 路由器对象
 const router = useRouter()
 // 路由对象
