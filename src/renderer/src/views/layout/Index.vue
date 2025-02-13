@@ -46,7 +46,7 @@ import PlayBar from './PlayBar.vue'
             .content-container {
                 width: 100%;
                 height: calc(100% - 60px);
-                background-color: skyblue;
+                padding: 10px;
             }
         }
     }
