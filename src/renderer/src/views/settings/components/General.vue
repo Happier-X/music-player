@@ -1,5 +1,5 @@
 <template>
-    <n-form ref="formRef">
+    <n-form>
         <n-card title="通用" :bordered="false"></n-card>
     </n-form>
 </template>

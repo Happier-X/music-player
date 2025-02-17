@@ -1,5 +1,5 @@
 <template>
-    <n-form ref="formRef">
+    <n-form>
         <n-card title="媒体库" :bordered="false">
             <n-form-item label="服务地址" path="inputValue">
                 <n-input placeholder="http://" clearable>

@@ -33,9 +33,9 @@ import { NTabs, NTab, NScrollbar } from 'naive-ui'
 import MediaLibrary from './components/MediaLibrary.vue'
 import General from './components/General.vue'
 import type { TabsInst, ScrollbarInst } from 'naive-ui'
-import { ref } from 'vue'
+import { ref, useTemplateRef } from 'vue'
 // 标签页实例
-const tabsRef = ref<TabsInst | null>(null)
+const tabsRef = useTemplateRef<TabsInst>('tabsRef')
 // 标签页值
 const tabsValue = ref('mediaLibrary')
 // 标签页
@@ -44,11 +44,11 @@ const tabs = ref([
     { name: 'general', label: '通用' }
 ])
 // 滚动条实例
-const scrollbarRef = ref<ScrollbarInst | null>(null)
+const scrollbarRef = useTemplateRef<ScrollbarInst>('scrollbarRef')
 // 媒体库实例
-const mediaLibraryRef = ref<HTMLElement | null>(null)
+const mediaLibraryRef = useTemplateRef<HTMLElement>('mediaLibraryRef')
 // 通用实例
-const generalRef = ref<HTMLElement | null>(null)
+const generalRef = useTemplateRef<HTMLElement>('generalRef')
 /**
  * tabs值变化
  */
