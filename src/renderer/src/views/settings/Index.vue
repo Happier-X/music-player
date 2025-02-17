@@ -12,6 +12,7 @@
         <div class="settings-content">
             <n-scrollbar>
                 <MediaLibrary />
+                <General />
             </n-scrollbar>
         </div>
     </div>
@@ -19,6 +20,7 @@
 <script setup lang="ts">
 import { NTabs, NTab, NScrollbar } from 'naive-ui'
 import MediaLibrary from './components/MediaLibrary.vue'
+import General from './components/General.vue'
 </script>
 <style scoped lang="scss">
 .settings-container {
