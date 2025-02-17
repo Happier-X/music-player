@@ -4,15 +4,26 @@
             <div class="settings-header-title">设置</div>
         </div>
         <div class="settings-tabs">
-            <n-tabs type="line">
-                <n-tab name="mediaLibrary">媒体库</n-tab>
-                <n-tab name="general">通用</n-tab>
+            <n-tabs
+                ref="tabsRef"
+                v-model:value="tabsValue"
+                @update:value="handleUpdateValue">
+                <n-tab
+                    v-for="(tab, index) in tabs"
+                    :key="index"
+                    :name="tab.name">
+                    {{ tab.label }}
+                </n-tab>
             </n-tabs>
         </div>
         <div class="settings-content">
-            <n-scrollbar>
-                <MediaLibrary />
-                <General />
+            <n-scrollbar ref="scrollbarRef">
+                <div ref="mediaLibraryRef">
+                    <MediaLibrary />
+                </div>
+                <div ref="generalRef">
+                    <General />
+                </div>
             </n-scrollbar>
         </div>
     </div>
@@ -21,6 +32,39 @@
 import { NTabs, NTab, NScrollbar } from 'naive-ui'
 import MediaLibrary from './components/MediaLibrary.vue'
 import General from './components/General.vue'
+import type { TabsInst, ScrollbarInst } from 'naive-ui'
+import { ref } from 'vue'
+// 标签页实例
+const tabsRef = ref<TabsInst | null>(null)
+// 标签页值
+const tabsValue = ref('mediaLibrary')
+// 标签页
+const tabs = ref([
+    { name: 'mediaLibrary', label: '媒体库' },
+    { name: 'general', label: '通用' }
+])
+// 滚动条实例
+const scrollbarRef = ref<ScrollbarInst | null>(null)
+// 媒体库实例
+const mediaLibraryRef = ref<HTMLElement | null>(null)
+// 通用实例
+const generalRef = ref<HTMLElement | null>(null)
+/**
+ * tabs值变化
+ */
+function handleUpdateValue(value: string) {
+    if (value === 'mediaLibrary' && mediaLibraryRef.value) {
+        scrollbarRef.value?.scrollTo({
+            top: mediaLibraryRef.value.offsetTop,
+            behavior: 'smooth'
+        })
+    } else if (value === 'general' && generalRef.value) {
+        scrollbarRef.value?.scrollTo({
+            top: generalRef.value.offsetTop,
+            behavior: 'smooth'
+        })
+    }
+}
 </script>
 <style scoped lang="scss">
 .settings-container {
