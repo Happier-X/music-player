@@ -1,7 +1,7 @@
 <template>
-    <n-form>
+    <!-- <n-form>
         <n-card title="通用" :bordered="false"></n-card>
-    </n-form>
+    </n-form> -->
 </template>
 <script setup lang="ts">
 import { NForm, NFormItem, NInput, NCard } from 'naive-ui'

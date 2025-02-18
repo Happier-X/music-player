@@ -30,7 +30,7 @@
 </template>
 <script setup lang="ts">
 import { NTabs, NTab, NScrollbar } from 'naive-ui'
-import MediaLibrary from './components/MediaLibrary.vue'
+import MediaLibrary from './components/mediaLibrary/index.vue'
 import General from './components/General.vue'
 import type { TabsInst, ScrollbarInst } from 'naive-ui'
 import { ref, useTemplateRef } from 'vue'
@@ -40,8 +40,8 @@ const tabsRef = useTemplateRef<TabsInst>('tabsRef')
 const tabsValue = ref('mediaLibrary')
 // 标签页
 const tabs = ref([
-    { name: 'mediaLibrary', label: '媒体库' },
-    { name: 'general', label: '通用' }
+    { name: 'mediaLibrary', label: '媒体库' }
+    // { name: 'general', label: '通用' }
 ])
 // 滚动条实例
 const scrollbarRef = useTemplateRef<ScrollbarInst>('scrollbarRef')

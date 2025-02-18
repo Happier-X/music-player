@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { exposeConf } from 'electron-conf/preload'
 
 // Custom APIs for renderer
 const api = {
@@ -69,3 +70,5 @@ if (process.contextIsolated) {
     // @ts-ignore (define in dts)
     window.api = api
 }
+
+exposeConf()
