@@ -1,42 +1,17 @@
 <template>
-    <div class="nav-bar-container">
-        <n-tooltip :show-arrow="false" trigger="hover" :delay="800">
-            <template #trigger>
-                <n-button
-                    :disabled="!canGoBack"
-                    circle
-                    color="transparent"
-                    class="icon-button"
-                    @click="handleBack">
-                    <n-icon size="25" color="#000000">
-                        <RiArrowLeftSLine></RiArrowLeftSLine>
-                    </n-icon>
-                </n-button>
-            </template>
-            后退
-        </n-tooltip>
-        <n-tooltip :show-arrow="false" trigger="hover" :delay="800">
-            <template #trigger>
-                <n-button
-                    :disabled="!canGoForward"
-                    circle
-                    color="transparent"
-                    class="icon-button"
-                    @click="handleForward">
-                    <n-icon size="25" color="#000000">
-                        <RiArrowRightSLine></RiArrowRightSLine>
-                    </n-icon>
-                </n-button>
-            </template>
-            前进
-        </n-tooltip>
+    <div class="w-full h-full flex items-center justify-start">
+        <button class="btn btn-sm btn-circle" @click="handleBack">
+            <RiArrowLeftSLine size="18px"></RiArrowLeftSLine>
+        </button>
+        <button class="btn btn-sm btn-circle" @click="handleForward">
+            <RiArrowRightSLine size="18px"></RiArrowRightSLine>
+        </button>
     </div>
 </template>
 <script setup lang="ts">
 import { RiArrowLeftSLine, RiArrowRightSLine } from '@remixicon/vue'
 import { ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { NTooltip, NButton, NIcon } from 'naive-ui'
 // 路由器对象
 const router = useRouter()
 // 路由对象
@@ -63,18 +38,3 @@ watch(route, () => {
     canGoForward.value = window.history.state?.forward !== null
 })
 </script>
-<style scoped lang="scss">
-.nav-bar-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    .icon-button {
-        &:hover {
-            color: black;
-            background-color: #e7e8ea;
-        }
-    }
-}
-</style>
