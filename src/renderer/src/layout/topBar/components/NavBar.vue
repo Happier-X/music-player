@@ -1,17 +1,21 @@
 <template>
     <div class="w-full h-full flex items-center justify-start">
-        <button
-            class="btn btn-sm btn-circle"
-            :class="{ 'btn-disabled': !canGoBack }"
-            @click="handleBack">
-            <RiArrowLeftSLine size="18px"></RiArrowLeftSLine>
-        </button>
-        <button
-            class="btn btn-sm btn-circle"
-            :class="{ 'btn-disabled': !canGoForward }"
-            @click="handleForward">
-            <RiArrowRightSLine size="18px"></RiArrowRightSLine>
-        </button>
+        <div class="tooltip tooltip-bottom" data-tip="后退">
+            <button
+                class="btn btn-sm btn-circle"
+                :class="{ 'btn-disabled': !canGoBack }"
+                @click="handleBack">
+                <RiArrowLeftSLine size="18px"></RiArrowLeftSLine>
+            </button>
+        </div>
+        <div class="tooltip tooltip-bottom" data-tip="前进">
+            <button
+                class="btn btn-sm btn-circle"
+                :class="{ 'btn-disabled': !canGoForward }"
+                @click="handleForward">
+                <RiArrowRightSLine size="18px"></RiArrowRightSLine>
+            </button>
+        </div>
     </div>
 </template>
 <script setup lang="ts">

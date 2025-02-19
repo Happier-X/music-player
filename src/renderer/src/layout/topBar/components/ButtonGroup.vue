@@ -1,25 +1,41 @@
 <template>
     <div class="w-full h-full flex items-center justify-end">
-        <button class="btn btn-sm btn-circle" @click="handleSwitchFullScreen">
-            <component
-                :is="isFullScreen ? RiFullscreenExitLine : RiFullscreenLine"
-                size="18px" />
-        </button>
-        <button class="btn btn-sm btn-circle" @click="handleMinimize">
-            <RiSubtractLine size="18px"></RiSubtractLine>
-        </button>
-        <button class="btn btn-sm btn-circle" @click="handleSwitchScreenSize">
-            <component
-                :is="
-                    isMaximized
-                        ? RiCheckboxMultipleBlankLine
-                        : RiCheckboxBlankLine
-                "
-                size="18px" />
-        </button>
-        <button class="btn btn-sm btn-circle" @click="handleClose">
-            <RiCloseLine size="18px"></RiCloseLine>
-        </button>
+        <div
+            class="tooltip tooltip-bottom"
+            :data-tip="isFullScreen ? '退出全屏' : '全屏'">
+            <button
+                class="btn btn-sm btn-circle"
+                @click="handleSwitchFullScreen">
+                <component
+                    :is="isFullScreen ? RiFullscreenExitLine : RiFullscreenLine"
+                    size="18px" />
+            </button>
+        </div>
+        <div class="tooltip tooltip-bottom" data-tip="最小化">
+            <button class="btn btn-sm btn-circle" @click="handleMinimize">
+                <RiSubtractLine size="18px"></RiSubtractLine>
+            </button>
+        </div>
+        <div
+            class="tooltip tooltip-bottom"
+            :data-tip="isMaximized ? '还原' : '最大化'">
+            <button
+                class="btn btn-sm btn-circle"
+                @click="handleSwitchScreenSize">
+                <component
+                    :is="
+                        isMaximized
+                            ? RiCheckboxMultipleBlankLine
+                            : RiCheckboxBlankLine
+                    "
+                    size="18px" />
+            </button>
+        </div>
+        <div class="tooltip tooltip-bottom" data-tip="关闭">
+            <button class="btn btn-sm btn-circle" @click="handleClose">
+                <RiCloseLine size="18px"></RiCloseLine>
+            </button>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
