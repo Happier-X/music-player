@@ -1,9 +1,15 @@
 <template>
     <div class="w-full h-full flex items-center justify-start">
-        <button class="btn btn-sm btn-circle" @click="handleBack">
+        <button
+            class="btn btn-sm btn-circle"
+            :class="{ 'btn-disabled': !canGoBack }"
+            @click="handleBack">
             <RiArrowLeftSLine size="18px"></RiArrowLeftSLine>
         </button>
-        <button class="btn btn-sm btn-circle" @click="handleForward">
+        <button
+            class="btn btn-sm btn-circle"
+            :class="{ 'btn-disabled': !canGoForward }"
+            @click="handleForward">
             <RiArrowRightSLine size="18px"></RiArrowRightSLine>
         </button>
     </div>
