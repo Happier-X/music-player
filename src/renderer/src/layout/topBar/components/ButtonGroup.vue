@@ -1,71 +1,25 @@
 <template>
-    <div class="button-group-container">
-        <n-tooltip :show-arrow="false" trigger="hover" :delay="800">
-            <template #trigger>
-                <n-button
-                    circle
-                    color="transparent"
-                    class="icon-button"
-                    @click="handleSwitchFullScreen">
-                    <n-icon size="20" color="#000000">
-                        <component
-                            :is="
-                                isFullScreen
-                                    ? RiFullscreenExitLine
-                                    : RiFullscreenLine
-                            " />
-                    </n-icon>
-                </n-button>
-            </template>
-            {{ isFullScreen ? '退出全屏' : '全屏' }}
-        </n-tooltip>
-        <n-tooltip :show-arrow="false" trigger="hover" :delay="800">
-            <template #trigger>
-                <n-button
-                    circle
-                    color="transparent"
-                    class="icon-button"
-                    @click="handleMinimize">
-                    <n-icon size="25" color="#000000">
-                        <RiSubtractLine></RiSubtractLine>
-                    </n-icon>
-                </n-button>
-            </template>
-            最小化
-        </n-tooltip>
-        <n-tooltip :show-arrow="false" trigger="hover" :delay="800">
-            <template #trigger>
-                <n-button
-                    circle
-                    color="transparent"
-                    class="icon-button"
-                    @click="handleSwitchScreenSize">
-                    <n-icon size="20" color="#000000">
-                        <component
-                            :is="
-                                isMaximized
-                                    ? RiCheckboxMultipleBlankLine
-                                    : RiCheckboxBlankLine
-                            " />
-                    </n-icon>
-                </n-button>
-            </template>
-            {{ isMaximized ? '最小化' : '最大化' }}
-        </n-tooltip>
-        <n-tooltip :show-arrow="false" trigger="hover" :delay="800">
-            <template #trigger>
-                <n-button
-                    circle
-                    color="transparent"
-                    class="icon-button"
-                    @click="handleClose">
-                    <n-icon size="25" color="#000000">
-                        <RiCloseLine></RiCloseLine>
-                    </n-icon>
-                </n-button>
-            </template>
-            关闭
-        </n-tooltip>
+    <div class="w-full h-full flex items-center justify-end">
+        <button class="btn btn-sm btn-circle" @click="handleSwitchFullScreen">
+            <component
+                :is="isFullScreen ? RiFullscreenExitLine : RiFullscreenLine"
+                size="18px" />
+        </button>
+        <button class="btn btn-sm btn-circle" @click="handleMinimize">
+            <RiSubtractLine size="18px"></RiSubtractLine>
+        </button>
+        <button class="btn btn-sm btn-circle" @click="handleSwitchScreenSize">
+            <component
+                :is="
+                    isMaximized
+                        ? RiCheckboxMultipleBlankLine
+                        : RiCheckboxBlankLine
+                "
+                size="18px" />
+        </button>
+        <button class="btn btn-sm btn-circle" @click="handleClose">
+            <RiCloseLine size="18px"></RiCloseLine>
+        </button>
     </div>
 </template>
 <script setup lang="ts">
@@ -78,7 +32,6 @@ import {
     RiCloseLine
 } from '@remixicon/vue'
 import { onMounted, ref } from 'vue'
-import { NTooltip, NButton, NIcon } from 'naive-ui'
 // 是否全屏
 const isFullScreen = ref(false)
 // 是否最大化
@@ -122,18 +75,3 @@ function handleClose() {
     window.api.closeWindow()
 }
 </script>
-<style scoped lang="scss">
-.button-group-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    .icon-button {
-        &:hover {
-            color: black;
-            background-color: #e7e8ea;
-        }
-    }
-}
-</style>

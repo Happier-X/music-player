@@ -1,19 +1,19 @@
 <template>
-    <div class="layout-container">
-        <div class="side-main-container">
-            <div class="side-container">
+    <div class="w-screen h-screen">
+        <div class="w-full h-[calc(100%-75px)] flex">
+            <div class="w-[200px] h-full">
                 <SideBar></SideBar>
             </div>
-            <div class="main-container">
-                <div class="top-container">
+            <div class="w-[calc(100%-200px)] h-full">
+                <div class="w-full h-[60px]">
                     <TopBar></TopBar>
                 </div>
-                <div class="content-container">
+                <div class="w-full h-[calc(100%-60px)] p-[10px]">
                     <RouterView></RouterView>
                 </div>
             </div>
         </div>
-        <div class="play-bar-container">
+        <div class="w-full h-[75px]">
             <PlayBar></PlayBar>
         </div>
     </div>
@@ -23,37 +23,3 @@ import SideBar from './SideBar.vue'
 import TopBar from './topBar/index.vue'
 import PlayBar from './PlayBar.vue'
 </script>
-<style scoped lang="scss">
-.layout-container {
-    width: 100vw;
-    height: 100vh;
-    .side-main-container {
-        width: 100%;
-        height: calc(100% - 75px);
-        background-color: #f7f9fc;
-        display: flex;
-        .side-container {
-            width: 200px;
-            height: 100%;
-        }
-        .main-container {
-            width: calc(100% - 200px);
-            height: 100%;
-            .top-container {
-                width: 100%;
-                height: 60px;
-            }
-            .content-container {
-                width: 100%;
-                height: calc(100% - 60px);
-                padding: 10px;
-            }
-        }
-    }
-    .play-bar-container {
-        width: 100%;
-        height: 75px;
-        background-color: #fafafa;
-    }
-}
-</style>
