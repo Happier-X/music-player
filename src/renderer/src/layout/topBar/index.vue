@@ -1,5 +1,6 @@
 <template>
-    <div class="w-full h-full p-[15px] flex items-center justify-between">
+    <div
+        class="w-full h-full pl-[15px] pr-[15px] flex items-center justify-between">
         <div class="w-full h-full">
             <NavBar></NavBar>
         </div>

@@ -1,109 +1,58 @@
 <template>
-    <div class="side-bar-container">
-        <div class="logo">音乐播放器</div>
-        <n-menu v-model:value="activeKey" :options="menuOptions" />
+    <div class="w-full h-full">
+        <ul class="menu bg-base-200 rounded-box w-full h-full">
+            <li v-for="(item, index) in menuList" :key="index">
+                <RouterLink
+                    :to="item.path"
+                    :class="{ 'menu-active': activeKey === item.key }">
+                    <component :is="item.icon"></component>
+                    {{ item.name }}
+                </RouterLink>
+            </li>
+        </ul>
     </div>
 </template>
 <script setup lang="ts">
 import {
     RiAlbumFill as AlbumIcon,
-    RiFileList2Fill as SongListIcon,
+    RiUserFill as ArtistIcon,
     RiMusicFill as MusicIcon,
     RiSettings4Fill as SettingsIcon,
-    RiUserFill as ArtistIcon
+    RiFileList2Fill as SongListIcon
 } from '@remixicon/vue'
-import type { MenuOption } from 'naive-ui'
-import { NIcon, NMenu } from 'naive-ui'
-import type { Component } from 'vue'
-import { RouterLink, useRoute } from 'vue-router'
-import { h, ref, watch } from 'vue'
-/**
- * 渲染图标
- */
-function renderIcon(icon: Component) {
-    return () => h(NIcon, null, { default: () => h(icon) })
-}
-// 菜单配置
-const menuOptions: MenuOption[] = [
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+// 菜单列表
+const menuList = [
     {
-        label: () =>
-            h(
-                RouterLink,
-                {
-                    to: {
-                        path: '/songs'
-                    }
-                },
-                {
-                    default: () => '歌曲'
-                }
-            ),
+        name: '歌曲',
         key: 'songs',
-        icon: renderIcon(MusicIcon)
+        path: '/songs',
+        icon: MusicIcon
     },
     {
-        label: () =>
-            h(
-                RouterLink,
-                {
-                    to: {
-                        path: '/album'
-                    }
-                },
-                {
-                    default: () => '专辑'
-                }
-            ),
+        name: '专辑',
         key: 'album',
-        icon: renderIcon(AlbumIcon)
+        path: '/album',
+        icon: AlbumIcon
     },
     {
-        label: () =>
-            h(
-                RouterLink,
-                {
-                    to: {
-                        path: '/artist'
-                    }
-                },
-                {
-                    default: () => '歌手'
-                }
-            ),
+        name: '歌手',
         key: 'artist',
-        icon: renderIcon(ArtistIcon)
+        path: '/artist',
+        icon: ArtistIcon
     },
     {
-        label: () =>
-            h(
-                RouterLink,
-                {
-                    to: {
-                        path: '/songList'
-                    }
-                },
-                {
-                    default: () => '歌单'
-                }
-            ),
+        name: '歌单',
         key: 'songList',
-        icon: renderIcon(SongListIcon)
+        path: '/songList',
+        icon: SongListIcon
     },
     {
-        label: () =>
-            h(
-                RouterLink,
-                {
-                    to: {
-                        path: '/settings'
-                    }
-                },
-                {
-                    default: () => '设置'
-                }
-            ),
+        name: '设置',
         key: 'settings',
-        icon: renderIcon(SettingsIcon)
+        path: '/settings',
+        icon: SettingsIcon
     }
 ]
 // 当前选中的菜单
@@ -114,16 +63,3 @@ watch(route, () => {
     activeKey.value = route.path.split('/')[1]
 })
 </script>
-<style lang="scss" scoped>
-.side-bar-container {
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    .logo {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-}
-</style>
