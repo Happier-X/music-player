@@ -1,94 +1,37 @@
 <template>
-    <div class="settings-container">
-        <div class="settings-header">
-            <div class="settings-header-title">设置</div>
+    <div class="w-full h-full">
+        <div class="w-full h-[50px] flex items-center">
+            <div class="text-2xl font-bold">设置</div>
         </div>
-        <div class="settings-tabs">
-            <n-tabs
-                ref="tabsRef"
-                v-model:value="tabsValue"
-                @update:value="handleUpdateValue">
-                <n-tab
-                    v-for="(tab, index) in tabs"
-                    :key="index"
-                    :name="tab.name">
-                    {{ tab.label }}
-                </n-tab>
-            </n-tabs>
+        <div
+            role="tablist"
+            class="tabs tabs-border w-full h-[50px] flex items-center">
+            <a
+                role="tab"
+                class="tab"
+                :class="{ 'tab-active': item.value === activeTab }"
+                v-for="(item, index) in tabs"
+                :key="index"
+                @click="handleClickTab(item)">
+                {{ item.label }}
+            </a>
         </div>
-        <div class="settings-content">
-            <n-scrollbar ref="scrollbarRef">
-                <div ref="mediaLibraryRef">
-                    <MediaLibrary />
-                </div>
-                <div ref="generalRef">
-                    <General />
-                </div>
-            </n-scrollbar>
+        <div class="w-full h-[calc(100%-100px)]">
+            <MediaLibrary />
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import { NTabs, NTab, NScrollbar } from 'naive-ui'
 import MediaLibrary from './components/mediaLibrary/index.vue'
-import General from './components/General.vue'
-import type { TabsInst, ScrollbarInst } from 'naive-ui'
-import { ref, useTemplateRef } from 'vue'
-// 标签页实例
-const tabsRef = useTemplateRef<TabsInst>('tabsRef')
-// 标签页值
-const tabsValue = ref('mediaLibrary')
+import { ref } from 'vue'
 // 标签页
-const tabs = ref([
-    { name: 'mediaLibrary', label: '媒体库' }
-    // { name: 'general', label: '通用' }
-])
-// 滚动条实例
-const scrollbarRef = useTemplateRef<ScrollbarInst>('scrollbarRef')
-// 媒体库实例
-const mediaLibraryRef = useTemplateRef<HTMLElement>('mediaLibraryRef')
-// 通用实例
-const generalRef = useTemplateRef<HTMLElement>('generalRef')
+const tabs = ref([{ value: 'mediaLibrary', label: '媒体库' }])
+// 当前标签
+const activeTab = ref('mediaLibrary')
 /**
- * tabs值变化
+ * 点击标签
  */
-function handleUpdateValue(value: string) {
-    if (value === 'mediaLibrary' && mediaLibraryRef.value) {
-        scrollbarRef.value?.scrollTo({
-            top: mediaLibraryRef.value.offsetTop,
-            behavior: 'smooth'
-        })
-    } else if (value === 'general' && generalRef.value) {
-        scrollbarRef.value?.scrollTo({
-            top: generalRef.value.offsetTop,
-            behavior: 'smooth'
-        })
-    }
+function handleClickTab(item: { value: string; label: string }) {
+    activeTab.value = item.value
 }
 </script>
-<style scoped lang="scss">
-.settings-container {
-    width: 100%;
-    height: 100%;
-    .settings-header {
-        width: 100%;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        .settings-header-title {
-            font-size: 20px;
-            font-weight: bold;
-        }
-    }
-    .settings-tabs {
-        width: 100%;
-        height: 50px;
-        display: flex;
-        align-items: center;
-    }
-    .settings-content {
-        width: 100%;
-        height: calc(100% - 100px);
-    }
-}
-</style>

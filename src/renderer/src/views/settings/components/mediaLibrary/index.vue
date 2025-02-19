@@ -1,33 +1,33 @@
 <template>
-    <n-list hoverable clickable :show-divider="false">
-        <template #header>
-            <div class="list-title">媒体库</div>
-        </template>
-        <n-list-item @click="handleClickMediaLibrary">
-            <template #prefix>
-                <div class="list-item-prefix">媒体库</div>
-            </template>
-            媒体库配置
-            <template #suffix>
-                <n-tag
-                    round
-                    :bordered="false"
-                    :type="isLink ? 'success' : 'error'">
-                    {{ isLink ? '已连接' : '未连接' }}
-                    <template #icon>
-                        <n-icon :component="isLink ? LinkIcon : UnlinkIcon" />
-                    </template>
-                </n-tag>
-            </template>
-        </n-list-item>
-    </n-list>
-    <media-library-dialog ref="mediaLibraryDialogRef" @save="checkIsLink" />
+    <ul class="list">
+        <li class="list-row font-bold">媒体库</li>
+        <li class="list-row" @click="handleClickMediaLibrary">
+            <div>媒体库</div>
+            <div>媒体库配置</div>
+            <div class="flex items-center gap-2 justify-center">
+                <div class="inline-grid *:[grid-area:1/1]">
+                    <div
+                        class="status animate-ping"
+                        :class="
+                            isLink ? 'status-success' : 'status-error'
+                        "></div>
+                    <div
+                        class="status"
+                        :class="
+                            isLink ? 'status-success' : 'status-error'
+                        "></div>
+                </div>
+                {{ isLink ? '已连接' : '未连接' }}
+            </div>
+        </li>
+    </ul>
+    <MediaLibraryDialog
+        ref="mediaLibraryDialogRef"
+        @save="saveMediaLibraryConfig" />
 </template>
 <script setup lang="ts">
-import { NList, NListItem, NTag, NIcon } from 'naive-ui'
-import { RiLink as LinkIcon, RiLinkUnlink as UnlinkIcon } from '@remixicon/vue'
 import { onMounted, ref, useTemplateRef } from 'vue'
-import MediaLibraryDialog from './components/mediaLibraryDialog.vue'
+import MediaLibraryDialog from './components/MediaLibraryDialog.vue'
 import { Conf } from 'electron-conf/renderer'
 // 配置
 const conf = new Conf()
@@ -37,11 +37,15 @@ const isLink = ref(false)
 const mediaLibraryDialogRef = useTemplateRef('mediaLibraryDialogRef')
 // 用户配置
 const userConfig: any = ref({})
-// 点击媒体库
+/**
+ * 点击媒体库
+ */
 function handleClickMediaLibrary() {
     mediaLibraryDialogRef.value?.show(userConfig.value?.mediaLibraryConfig)
 }
-// 获取用户配置
+/**
+ * 获取用户配置
+ */
 async function getUserConfig() {
     userConfig.value = await conf.get('userConfig', {
         mediaLibraryConfig: {
@@ -51,9 +55,20 @@ async function getUserConfig() {
         }
     })
 }
-// 检查是否连接
+/**
+ * 检查是否连接
+ */
 async function checkIsLink() {
-    isLink.value = true
+    isLink.value = false
+}
+/**
+ * 保存媒体库配置
+ */
+async function saveMediaLibraryConfig(config: any) {
+    await conf.set(
+        'userConfig.mediaLibraryConfig',
+        JSON.parse(JSON.stringify(config))
+    )
 }
 // 挂载
 onMounted(async () => {
@@ -61,15 +76,3 @@ onMounted(async () => {
     await checkIsLink()
 })
 </script>
-<style scoped lang="scss">
-.list-title {
-    font-size: 16px;
-    font-weight: 600;
-    text-wrap: nowrap;
-}
-.list-item-prefix {
-    font-size: 14px;
-    font-weight: 600;
-    text-wrap: nowrap;
-}
-</style>
