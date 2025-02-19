@@ -2,7 +2,7 @@
     <div class="w-full h-full flex items-center justify-start">
         <div class="tooltip tooltip-bottom" data-tip="后退">
             <button
-                class="btn btn-sm btn-circle"
+                class="btn btn-sm btn-circle btn-ghost"
                 :class="{ 'btn-disabled': !canGoBack }"
                 @click="handleBack">
                 <RiArrowLeftSLine size="18px"></RiArrowLeftSLine>
@@ -10,7 +10,7 @@
         </div>
         <div class="tooltip tooltip-bottom" data-tip="前进">
             <button
-                class="btn btn-sm btn-circle"
+                class="btn btn-sm btn-circle btn-ghost"
                 :class="{ 'btn-disabled': !canGoForward }"
                 @click="handleForward">
                 <RiArrowRightSLine size="18px"></RiArrowRightSLine>
