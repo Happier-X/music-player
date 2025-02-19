@@ -1,9 +1,9 @@
 <template>
-    <div class="top-bar-container">
-        <div class="nav-bar-container">
+    <div class="w-full h-full p-[15px] flex items-center justify-between">
+        <div class="w-full h-full">
             <NavBar></NavBar>
         </div>
-        <div class="button-group-container">
+        <div class="w-full h-full">
             <ButtonGroup></ButtonGroup>
         </div>
     </div>
@@ -12,21 +12,3 @@
 import NavBar from './components/NavBar.vue'
 import ButtonGroup from './components/ButtonGroup.vue'
 </script>
-<style scoped lang="scss">
-.top-bar-container {
-    width: 100%;
-    height: 100%;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .nav-bar-container {
-        width: 100%;
-        height: 100%;
-    }
-    .button-group-container {
-        width: 100%;
-        height: 100%;
-    }
-}
-</style>
