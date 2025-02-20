@@ -61,10 +61,14 @@ async function getUserConfig() {
  * 检查是否连接
  */
 async function checkIsLink() {
-    const res = await api.ping()
-    if (res['subsonic-response']['status'] === 'ok') {
-        isLink.value = true
-    } else {
+    try {
+        const res = await api.ping()
+        if (res['subsonic-response']['status'] === 'ok') {
+            isLink.value = true
+        } else {
+            isLink.value = false
+        }
+    } catch (error) {
         isLink.value = false
     }
 }
