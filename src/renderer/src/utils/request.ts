@@ -1,4 +1,8 @@
 import axios from 'axios'
+import { Conf } from 'electron-conf/renderer'
+import { MD5 } from 'crypto-js'
+// 配置
+const conf: any = new Conf()
 // 是否是取消的请求
 const { isCancel } = axios
 // 请求队列
@@ -7,10 +11,23 @@ const pendingMap = new Map()
 const whiteList = ['/test']
 // 创建 axios 实例
 const service = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: await conf.get(
+        'userConfig.mediaLibraryConfig.serverAddress',
+        'http://localhost:3000'
+    ),
     timeout: 5000, // 请求超时时间（5秒）
     headers: {
         'Content-Type': 'application/json' // 默认请求头
+    },
+    params: {
+        u: await conf.get('userConfig.mediaLibraryConfig.username'),
+        t: MD5(
+            `${await conf.get('userConfig.mediaLibraryConfig.password')}happier`
+        ).toString(),
+        s: 'happier',
+        v: '1.16.1',
+        c: 'web',
+        f: 'json'
     }
 })
 // 定义错误状态码映射
