@@ -25,6 +25,7 @@
     "@electron-toolkit/utils": "^4.0.0",
     "@remixicon/vue": "^4.6.0",
     "@tailwindcss/vite": "^4.0.7",
+    "axios": "^1.7.9",
     "electron-conf": "^1.2.1",
     "electron-updater": "^6.3.9",
     "tailwindcss": "^4.0.7",
