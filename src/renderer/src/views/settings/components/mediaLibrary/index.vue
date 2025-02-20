@@ -24,12 +24,19 @@
     <MediaLibraryDialog
         ref="mediaLibraryDialogRef"
         @save="saveMediaLibraryConfig" />
+    <div class="toast toast-top toast-center" v-if="isSaveSuccess">
+        <div class="alert alert-success">
+            <CheckIcon />
+            <span>保存成功</span>
+        </div>
+    </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, useTemplateRef } from 'vue'
+import { onMounted, ref, useTemplateRef, onUnmounted } from 'vue'
 import MediaLibraryDialog from './components/MediaLibraryDialog.vue'
 import { Conf } from 'electron-conf/renderer'
 import { api } from '../../../../api/index'
+import { RiCheckboxCircleLine as CheckIcon } from '@remixicon/vue'
 // 配置
 const conf = new Conf()
 // 是否连接
@@ -38,6 +45,8 @@ const isLink = ref(false)
 const mediaLibraryDialogRef = useTemplateRef('mediaLibraryDialogRef')
 // 用户配置
 const userConfig: any = ref({})
+// 是否保存成功
+const isSaveSuccess = ref(false)
 /**
  * 点击媒体库
  */
@@ -72,6 +81,7 @@ async function checkIsLink() {
         isLink.value = false
     }
 }
+let timer: any = null
 /**
  * 保存媒体库配置
  */
@@ -80,11 +90,18 @@ async function saveMediaLibraryConfig(config: any) {
         'userConfig.mediaLibraryConfig',
         JSON.parse(JSON.stringify(config))
     )
+    isSaveSuccess.value = true
+    timer = setTimeout(() => {
+        isSaveSuccess.value = false
+    }, 800)
     await checkIsLink()
 }
 // 挂载
 onMounted(async () => {
     await getUserConfig()
     await checkIsLink()
+})
+onUnmounted(() => {
+    clearTimeout(timer)
 })
 </script>

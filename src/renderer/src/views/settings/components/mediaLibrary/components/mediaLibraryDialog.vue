@@ -38,15 +38,7 @@
     </dialog>
 </template>
 <script setup lang="ts">
-import {
-    RiLockLine as PasswordIcon,
-    RiServerLine as ServerIcon,
-    RiUserLine as UserIcon
-} from '@remixicon/vue'
 import { ref, useTemplateRef } from 'vue'
-import { Conf } from 'electron-conf/renderer'
-// 配置
-const conf = new Conf()
 // 对话框实例
 const dialogRef = useTemplateRef('dialogRef')
 defineExpose({
