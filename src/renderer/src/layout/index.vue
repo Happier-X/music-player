@@ -12,6 +12,11 @@
 import Normal from './normal/index.vue'
 import Immersive from './immersive/index.vue'
 import { ref } from 'vue'
+import { Howl } from 'howler'
 const isNormal = ref(true)
+// 音频实例
+const sound = new Howl({
+    
+})
 </script>
 <style scoped></style>
