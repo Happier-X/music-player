@@ -1,7 +1,7 @@
 <template>
     <div class="w-full h-full">
         <ul class="menu bg-base-200 rounded-box w-full h-full">
-            <li v-for="(item, index) in menuList" :key="index">
+            <li v-for="(item, index) in menuList" :key="index" class="p-1">
                 <RouterLink
                     :to="item.path"
                     :class="{ 'menu-active': activeKey === item.key }">
