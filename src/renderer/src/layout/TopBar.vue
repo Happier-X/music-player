@@ -5,11 +5,11 @@
             <NavBar></NavBar>
         </div>
         <div class="w-full h-full">
-            <ButtonGroup></ButtonGroup>
+            <WindowControlButton></WindowControlButton>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import NavBar from './components/NavBar.vue'
-import ButtonGroup from './components/ButtonGroup.vue'
+import WindowControlButton from './components/WindowControlButton.vue'
 </script>
