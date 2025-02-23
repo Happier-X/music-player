@@ -115,7 +115,7 @@ function removePendingRequest(key) {
 const request = {
     async get(url, params?) {
         const instance = await createAxiosInstance()
-        return instance.get(url, { params })
+        return instance.get(url, params)
     },
     async post(url, data?) {
         const instance = await createAxiosInstance()
