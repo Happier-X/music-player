@@ -128,6 +128,10 @@ const request = {
     async delete(url, data?) {
         const instance = await createAxiosInstance()
         return instance.delete(url, data)
+    },
+    async getUrl(url, params?) {
+        const instance = await createAxiosInstance()
+        return instance.getUri({ url, params })
     }
 }
 export default request

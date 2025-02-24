@@ -210,5 +210,157 @@ export const subsonicApi = {
                 toYear,
                 musicFolderId
             }
-        })
+        }),
+    /**
+     * 根据流派获取歌曲
+     */
+    getSongsByGenre: (
+        genre: string,
+        count?: number,
+        offset?: number,
+        musicFolderId?: string
+    ) =>
+        request.get('/rest/getSongsByGenre', {
+            params: {
+                genre,
+                count,
+                offset,
+                musicFolderId
+            }
+        }),
+    /**
+     * 获取所有用户当前正在播放的内容
+     */
+    getNowPlaying: () => request.get('/rest/getNowPlaying'),
+    /**
+     * 获取收藏的歌曲、专辑和艺术家
+     */
+    getStarred: (musicFolderId?: string) =>
+        request.get('/rest/getStarred', {
+            params: {
+                musicFolderId
+            }
+        }),
+    /**
+     * 获取收藏的歌曲、专辑和艺术家（根据 ID3 标签组织）
+     */
+    getStarredOrganizedByID3: (musicFolderId?: string) =>
+        request.get('/rest/getStarred2', {
+            params: {
+                musicFolderId
+            }
+        }),
+    /**
+     * 搜索专辑、歌曲、艺术家
+     */
+    search: (
+        query: string,
+        artistCount?: number,
+        artistOffset?: number,
+        albumCount?: number,
+        albumOffset?: number,
+        songCount?: number,
+        songOffset?: number,
+        musicFolderId?: string
+    ) =>
+        request.get('/rest/search2', {
+            params: {
+                query,
+                artistCount,
+                artistOffset,
+                albumCount,
+                albumOffset,
+                songCount,
+                songOffset,
+                musicFolderId
+            }
+        }),
+    /**
+     * 搜索专辑、歌曲、艺术家（根据 ID3 标签组织）
+     */
+    searchOrganizedByID3: (
+        query: string,
+        artistCount?: number,
+        artistOffset?: number,
+        albumCount?: number,
+        albumOffset?: number,
+        songCount?: number,
+        songOffset?: number,
+        musicFolderId?: string
+    ) =>
+        request.get('/rest/search3', {
+            params: {
+                query,
+                artistCount,
+                artistOffset,
+                albumCount,
+                albumOffset,
+                songCount,
+                songOffset,
+                musicFolderId
+            }
+        }),
+    /**
+     * 根据用户名获取歌单
+     */
+    getPlaylistsByUsername: (username?: string) =>
+        request.get('/rest/getPlaylists', {
+            params: {
+                username
+            }
+        }),
+    /**
+     * 通过歌单id获取歌单中的歌曲
+     */
+    getSongsByPlaylistId: (id: string) =>
+        request.get('/rest/getPlaylist', {
+            params: {
+                id
+            }
+        }),
+    /**
+     * 创建歌单
+     */
+    createPlaylist: (name: string, playlistId?: string, songId?: string) =>
+        request.get('/rest/createPlaylist', {
+            params: {
+                name,
+                playlistId,
+                songId
+            }
+        }),
+    /**
+     * 更新歌单
+     */
+    updatePlaylist: (
+        playlistId: string,
+        name?: string,
+        comment?: string,
+        isPublic?: boolean,
+        songIdToAdd?: string,
+        songIndexToRemove?: string
+    ) =>
+        request.get('/rest/updatePlaylist', {
+            params: {
+                playlistId,
+                name,
+                comment,
+                public: isPublic,
+                songIdToAdd,
+                songIndexToRemove
+            }
+        }),
+    /**
+     * 删除歌单
+     */
+    deletePlaylist: (id: string) =>
+        request.get('/rest/deletePlaylist', {
+            params: {
+                id
+            }
+        }),
+    /**
+     * 播放歌曲
+     */
+    playSong: (id: string) => request.getUrl('/rest/stream', { id })
 }
