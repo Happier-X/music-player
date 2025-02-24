@@ -40,28 +40,14 @@ const handleRequestError = (error: any) => {
 }
 // 创建 axios 实例
 const instance = axios.create({
-    baseURL: await conf.get(
-        'userConfig.mediaLibraryConfig.serverAddress',
-        'http://localhost:3000'
-    ),
     timeout: 5000,
     headers: {
         'Content-Type': 'application/json'
-    },
-    params: {
-        u: await conf.get('userConfig.mediaLibraryConfig.username'),
-        t: MD5(
-            `${await conf.get('userConfig.mediaLibraryConfig.password')}happier`
-        ).toString(),
-        s: 'happier',
-        v: '1.16.1',
-        c: 'web',
-        f: 'json'
     }
 })
 // 设置拦截器
 instance.interceptors.request.use(
-    (config) => {
+    async (config) => {
         const requestKey = generateRequestKey(config)
         if (whiteList.indexOf(requestKey) === -1) {
             removePendingRequest(requestKey)
@@ -72,6 +58,20 @@ instance.interceptors.request.use(
         const token = localStorage.getItem('token')
         if (token) {
             config.headers.Authorization = `Bearer ${token}`
+        }
+        config.baseURL = await conf.get(
+            'userConfig.mediaLibraryConfig.serverAddress',
+            'http://localhost:3000'
+        )
+        config.params = {
+            u: await conf.get('userConfig.mediaLibraryConfig.username'),
+            t: MD5(
+                `${await conf.get('userConfig.mediaLibraryConfig.password')}happier`
+            ).toString(),
+            s: 'happier',
+            v: '1.16.1',
+            c: 'web',
+            f: 'json'
         }
         return config
     },
