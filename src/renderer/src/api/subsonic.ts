@@ -4,11 +4,11 @@ export const subsonicApi = {
     /**
      * 检查连接
      */
-    ping: () => request.get('/rest/ping'),
+    ping: () => request('/rest/ping'),
     /**
      * 获取音乐文件夹
      */
-    getMusicFolders: () => request.get('/rest/getMusicFolders'),
+    getMusicFolders: () => request('/rest/getMusicFolders'),
     /**
      * 获取艺术家的索引列表
      */
@@ -362,5 +362,5 @@ export const subsonicApi = {
     /**
      * 播放歌曲
      */
-    playSong: (id: string) => request.getUrl('/rest/stream', { id })
+    playSong: (id: string) => request.get('/rest/stream', { params: { id } })
 }
