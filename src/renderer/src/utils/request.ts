@@ -64,6 +64,7 @@ instance.interceptors.request.use(
             'http://localhost:3000'
         )
         config.params = {
+            ...config.params,
             u: await conf.get('userConfig.mediaLibraryConfig.username'),
             t: MD5(
                 `${await conf.get('userConfig.mediaLibraryConfig.password')}happier`
