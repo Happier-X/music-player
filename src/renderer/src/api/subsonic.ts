@@ -392,7 +392,15 @@ export const subsonicApi = {
     /**
      * 歌曲播放链接
      */
-    getStreamUrl: async (id: string) =>
+    getStreamUrl: async (
+        id: string,
+        maxBitRate?: string,
+        format?: string,
+        timeOffset?: string,
+        size?: string,
+        estimateContentLength?: string,
+        converted?: string
+    ) =>
         request.getUri({
             baseURL: await conf.get(
                 'userConfig.mediaLibraryConfig.serverAddress',
@@ -408,7 +416,88 @@ export const subsonicApi = {
                 v: '1.16.1',
                 c: 'web',
                 f: 'json',
+                id,
+                maxBitRate,
+                format,
+                timeOffset,
+                size,
+                estimateContentLength,
+                converted
+            }
+        }),
+    /**
+     * 下载歌曲
+     */
+    downloadSong: (id: string) =>
+        request({
+            url: '/rest/download',
+            params: {
                 id
             }
-        })
+        }),
+    /**
+     * 根据id获取封面
+     */
+    getCoverById: (id: string, size?: string) =>
+        request({
+            url: '/rest/getCoverArt',
+            params: {
+                id,
+                size
+            }
+        }),
+    /**
+     * 获取歌词
+     */
+    getLyrics: (artist?: string, title?: string) =>
+        request({
+            url: '/rest/getLyrics',
+            params: {
+                artist,
+                title
+            }
+        }),
+    /**
+     * 收藏歌曲、专辑、艺术家
+     */
+    star: (id?: string, albumId?: string, artistId?: string) =>
+        request({
+            url: '/rest/star',
+            params: {
+                id,
+                albumId,
+                artistId
+            }
+        }),
+    /**
+     * 取消收藏歌曲、专辑、艺术家
+     */
+    unStar: (id?: string, albumId?: string, artistId?: string) =>
+        request({
+            url: '/rest/unstar',
+            params: {
+                id,
+                albumId,
+                artistId
+            }
+        }),
+    /**
+     * 为歌曲、专辑、艺术家评分
+     */
+    setRating: (id: string, rating: number) =>
+        request({
+            url: '/rest/setRating',
+            params: {
+                id,
+                rating
+            }
+        }),
+    /**
+     * 获取扫描状态
+     */
+    getScanStatus: () => request('/rest/getScanStatus'),
+    /**
+     * 扫描
+     */
+    startScan: () => request('/rest/startScan')
 }
