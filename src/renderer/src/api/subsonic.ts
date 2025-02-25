@@ -13,7 +13,8 @@ export const subsonicApi = {
      * 获取艺术家的索引列表
      */
     getArtistsIndexesList: (musicFolderId?: string, ifModifiedSince?: string) =>
-        request.get('/rest/getIndexes', {
+        request({
+            url: '/rest/getIndexes',
             params: {
                 musicFolderId,
                 ifModifiedSince
@@ -23,7 +24,8 @@ export const subsonicApi = {
      * 根据艺术家id获取音乐目录
      */
     getMusicDirectoryByArtistId: (id: string) =>
-        request.get('/rest/getMusicDirectory', {
+        request({
+            url: '/rest/getMusicDirectory',
             params: {
                 id
             }
@@ -36,7 +38,8 @@ export const subsonicApi = {
      * 获取艺术家索引列表（根据 ID3 标签组织）
      */
     getArtistsIndexesListOrganizedByID3: (musicFolderId?: string) =>
-        request.get('/rest/getArtists', {
+        request({
+            url: '/rest/getArtists',
             params: {
                 musicFolderId
             }
@@ -45,7 +48,8 @@ export const subsonicApi = {
      * 根据艺术家id获取艺术家信息和专辑列表（根据 ID3 标签组织）
      */
     getArtistInfoAndAlbumListByArtistIdOrganizedByID3: (id: string) =>
-        request.get('/rest/getArtist', {
+        request({
+            url: '/rest/getArtist',
             params: {
                 id
             }
@@ -54,7 +58,8 @@ export const subsonicApi = {
      * 根据专辑id获取专辑信息和歌曲列表（根据 ID3 标签组织）
      */
     getAlbumInfoAndSongListByAlbumIdOrganizedByID3: (id: string) =>
-        request.get('/rest/getAlbum', {
+        request({
+            url: '/rest/getAlbum',
             params: {
                 id
             }
@@ -63,7 +68,8 @@ export const subsonicApi = {
      * 根据歌曲id获取歌曲信息
      */
     getSongInfoBySongId: (id: string) =>
-        request.get('/rest/getSong', {
+        request({
+            url: '/rest/getSong',
             params: {
                 id
             }
@@ -76,7 +82,8 @@ export const subsonicApi = {
         count?: number,
         includeNotPresent?: boolean
     ) =>
-        request.get('/rest/getArtistInfo', {
+        request({
+            url: '/rest/getArtistInfo',
             params: {
                 id,
                 count,
@@ -91,7 +98,8 @@ export const subsonicApi = {
         count?: number,
         includeNotPresent?: boolean
     ) =>
-        request.get('/rest/getArtistInfo2', {
+        request({
+            url: '/rest/getArtistInfo2',
             params: {
                 id,
                 count,
@@ -102,7 +110,8 @@ export const subsonicApi = {
      * 根据id获取专辑注释和图像
      */
     getAlbumNotesAndImageById: (id: string) =>
-        request.get('/rest/getAlbumInfo', {
+        request({
+            url: '/rest/getAlbumInfo',
             params: {
                 id
             }
@@ -111,7 +120,8 @@ export const subsonicApi = {
      * 根据专辑id获取专辑注释和图像（根据 ID3 标签组织）
      */
     getAlbumNotesAndImageByAlbumIdOrganizedByID3: (id: string) =>
-        request.get('/rest/getAlbumInfo2', {
+        request({
+            url: '/rest/getAlbumInfo2',
             params: {
                 id
             }
@@ -120,7 +130,8 @@ export const subsonicApi = {
      * 根据id获取相似歌曲
      */
     getSimilarSongsById: (id: string, count?: number) =>
-        request.get('/rest/getSimilarSongs', {
+        request({
+            url: '/rest/getSimilarSongs',
             params: {
                 id,
                 count
@@ -130,7 +141,8 @@ export const subsonicApi = {
      * 根据艺术家id获取相似歌曲（根据 ID3 标签组织）
      */
     getSimilarSongsByArtistIdOrganizedByID3: (id: string, count?: number) =>
-        request.get('/rest/getSimilarSongs2', {
+        request({
+            url: '/rest/getSimilarSongs2',
             params: {
                 id,
                 count
@@ -140,7 +152,8 @@ export const subsonicApi = {
      * 根据艺术家名称获取热门歌曲
      */
     getTopSongsByArtistName: (artist: string, count?: number) =>
-        request.get('/rest/getTopSongs', {
+        request({
+            url: '/rest/getTopSongs',
             params: {
                 artist,
                 count
@@ -158,7 +171,8 @@ export const subsonicApi = {
         genre?: string,
         musicFolderId?: string
     ) =>
-        request.get('/rest/getAlbumList', {
+        request({
+            url: '/rest/getAlbumList',
             params: {
                 type,
                 size,
@@ -181,7 +195,8 @@ export const subsonicApi = {
         genre?: string,
         musicFolderId?: string
     ) =>
-        request.get('/rest/getAlbumList2', {
+        request({
+            url: '/rest/getAlbumList2',
             params: {
                 type,
                 size,
@@ -202,7 +217,8 @@ export const subsonicApi = {
         toYear?: number,
         musicFolderId?: string
     ) =>
-        request.get('/rest/getRandomSongs', {
+        request({
+            url: '/rest/getRandomSongs',
             params: {
                 size,
                 genre,
@@ -220,7 +236,8 @@ export const subsonicApi = {
         offset?: number,
         musicFolderId?: string
     ) =>
-        request.get('/rest/getSongsByGenre', {
+        request({
+            url: '/rest/getSongsByGenre',
             params: {
                 genre,
                 count,
@@ -231,12 +248,13 @@ export const subsonicApi = {
     /**
      * 获取所有用户当前正在播放的内容
      */
-    getNowPlaying: () => request.get('/rest/getNowPlaying'),
+    getNowPlaying: () => request('/rest/getNowPlaying'),
     /**
      * 获取收藏的歌曲、专辑和艺术家
      */
     getStarred: (musicFolderId?: string) =>
-        request.get('/rest/getStarred', {
+        request({
+            url: '/rest/getStarred',
             params: {
                 musicFolderId
             }
@@ -245,7 +263,8 @@ export const subsonicApi = {
      * 获取收藏的歌曲、专辑和艺术家（根据 ID3 标签组织）
      */
     getStarredOrganizedByID3: (musicFolderId?: string) =>
-        request.get('/rest/getStarred2', {
+        request({
+            url: '/rest/getStarred2',
             params: {
                 musicFolderId
             }
@@ -263,7 +282,8 @@ export const subsonicApi = {
         songOffset?: number,
         musicFolderId?: string
     ) =>
-        request.get('/rest/search2', {
+        request({
+            url: '/rest/search2',
             params: {
                 query,
                 artistCount,
@@ -288,7 +308,8 @@ export const subsonicApi = {
         songOffset?: number,
         musicFolderId?: string
     ) =>
-        request.get('/rest/search3', {
+        request({
+            url: '/rest/search3',
             params: {
                 query,
                 artistCount,
@@ -304,7 +325,8 @@ export const subsonicApi = {
      * 根据用户名获取歌单
      */
     getPlaylistsByUsername: (username?: string) =>
-        request.get('/rest/getPlaylists', {
+        request({
+            url: '/rest/getPlaylists',
             params: {
                 username
             }
@@ -313,7 +335,8 @@ export const subsonicApi = {
      * 通过歌单id获取歌单中的歌曲
      */
     getSongsByPlaylistId: (id: string) =>
-        request.get('/rest/getPlaylist', {
+        request({
+            url: '/rest/getPlaylist',
             params: {
                 id
             }
@@ -322,7 +345,8 @@ export const subsonicApi = {
      * 创建歌单
      */
     createPlaylist: (name: string, playlistId?: string, songId?: string) =>
-        request.get('/rest/createPlaylist', {
+        request({
+            url: '/rest/createPlaylist',
             params: {
                 name,
                 playlistId,
@@ -340,7 +364,8 @@ export const subsonicApi = {
         songIdToAdd?: string,
         songIndexToRemove?: string
     ) =>
-        request.get('/rest/updatePlaylist', {
+        request({
+            url: '/rest/updatePlaylist',
             params: {
                 playlistId,
                 name,
@@ -354,13 +379,20 @@ export const subsonicApi = {
      * 删除歌单
      */
     deletePlaylist: (id: string) =>
-        request.get('/rest/deletePlaylist', {
+        request({
+            url: '/rest/deletePlaylist',
             params: {
                 id
             }
         }),
     /**
-     * 播放歌曲
+     * 歌曲播放链接
      */
-    playSong: (id: string) => request.get('/rest/stream', { params: { id } })
+    getStreamUrl: (id: string) =>
+        request.getUri({
+            url: '/rest/stream',
+            params: {
+                id
+            }
+        })
 }
