@@ -1,4 +1,8 @@
 import request from '../utils/request'
+import { Conf } from 'electron-conf/renderer'
+import { MD5 } from 'crypto-js'
+// 配置
+const conf: any = new Conf()
 
 export const subsonicApi = {
     /**
@@ -388,10 +392,22 @@ export const subsonicApi = {
     /**
      * 歌曲播放链接
      */
-    getStreamUrl: (id: string) =>
+    getStreamUrl: async (id: string) =>
         request.getUri({
+            baseURL: await conf.get(
+                'userConfig.mediaLibraryConfig.serverAddress',
+                'http://localhost:3000'
+            ),
             url: '/rest/stream',
             params: {
+                u: await conf.get('userConfig.mediaLibraryConfig.username'),
+                t: MD5(
+                    `${await conf.get('userConfig.mediaLibraryConfig.password')}happier`
+                ).toString(),
+                s: 'happier',
+                v: '1.16.1',
+                c: 'web',
+                f: 'json',
                 id
             }
         })
