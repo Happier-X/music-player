@@ -275,29 +275,20 @@ export const subsonicApi = {
         }),
     /**
      * 搜索专辑、歌曲、艺术家
+     * @param {Object} params 搜索参数
+     * @param {string} params.query 搜索关键词
+     * @param {number} [params.artistCount=20] 返回的艺术家数量，默认20
+     * @param {number} [params.artistOffset=0] 艺术家列表偏移量，用于分页，默认0
+     * @param {number} [params.albumCount=20] 返回的专辑数量，默认20
+     * @param {number} [params.albumOffset=0] 专辑列表偏移量，用于分页，默认0
+     * @param {number} [params.songCount=20] 返回的歌曲数量，默认20
+     * @param {number} [params.songOffset=0] 歌曲列表偏移量，用于分页，默认0
+     * @param {string} params.musicFolderId 音乐文件夹ID
      */
-    search: (
-        query: string,
-        artistCount?: number,
-        artistOffset?: number,
-        albumCount?: number,
-        albumOffset?: number,
-        songCount?: number,
-        songOffset?: number,
-        musicFolderId?: string
-    ) =>
+    search: (params) =>
         request({
             url: '/rest/search2',
-            params: {
-                query,
-                artistCount,
-                artistOffset,
-                albumCount,
-                albumOffset,
-                songCount,
-                songOffset,
-                musicFolderId
-            }
+            params
         }),
     /**
      * 搜索专辑、歌曲、艺术家（根据 ID3 标签组织）
