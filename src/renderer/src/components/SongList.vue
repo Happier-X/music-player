@@ -2,16 +2,14 @@
     <div class="w-full h-full overflow-y-scroll scrollbar-hide">
         <ul class="list">
             <li class="list-row" v-for="(item, index) in list" :key="index">
-                <div
+                <!-- <div
                     class="w-15 text-center text-4xl font-thin opacity-30 tabular-nums">
                     {{ index + 1 }}
+                </div> -->
+                <div>
+                    <img class="size-10 rounded-box" :src="item.coverImg" />
                 </div>
                 <div>
-                    <img
-                        class="size-10 rounded-box"
-                        :src="item.coverImg" />
-                </div>
-                <div class="list-col-grow">
                     <div>{{ item.title }}</div>
                     <div class="text-xs font-semibold opacity-60">
                         {{ item.artist }} - {{ item.album }}
