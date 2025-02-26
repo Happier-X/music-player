@@ -9,7 +9,11 @@
                     <TopBar></TopBar>
                 </div>
                 <div class="w-full h-[calc(100%-60px)] p-[10px]">
-                    <RouterView></RouterView>
+                    <RouterView v-slot="{ Component }">
+                        <KeepAlive>
+                            <component :is="Component" />
+                        </KeepAlive>
+                    </RouterView>
                 </div>
             </div>
         </div>
