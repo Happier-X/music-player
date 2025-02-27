@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full flex items-center gap-3">
+    <div class="w-full h-full flex items-center gap-3">
         <div>
             <img class="size-12 rounded-box" :src="coverImg" />
         </div>
