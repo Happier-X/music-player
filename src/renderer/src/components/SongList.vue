@@ -6,14 +6,14 @@
                 v-for="(item, index) in list"
                 :key="index"
                 @dblclick="handlePlay(item)">
-                <!-- <div
-                    class="w-15 text-center text-4xl font-thin opacity-30 tabular-nums">
+                <div
+                    class="w-16 text-center text-4xl font-thin opacity-30 tabular-nums">
                     {{ index + 1 }}
-                </div> -->
+                </div>
                 <div>
                     <img class="size-10 rounded-box" :src="item.coverImg" />
                 </div>
-                <div>
+                <div class="list-col-grow">
                     <div>{{ item.title }}</div>
                     <div class="text-xs font-semibold opacity-60">
                         {{ item.artist }} - {{ item.album }}
