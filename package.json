@@ -43,7 +43,7 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.4.0",
-    "daisyui": "^5.0.0-beta.8",
+    "daisyui": "^5.0.0-beta.9",
     "electron": "^34.3.0",
     "electron-builder": "^25.1.8",
     "electron-vite": "^3.0.0",
