@@ -70,13 +70,13 @@ export const subsonicApi = {
         }),
     /**
      * 根据歌曲id获取歌曲信息
+     * @param {Object} params 参数
+     * @param {string} params.id 歌曲id
      */
-    getSongInfoBySongId: (id: string) =>
+    getSongInfoBySongId: (params) =>
         request({
             url: '/rest/getSong',
-            params: {
-                id
-            }
+            params
         }),
     /**
      * 根据id获取艺术家传记、图像和相似艺术家
