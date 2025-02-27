@@ -8,14 +8,17 @@
                 :album="playerStore.currentSongInfo?.album"></MusicInfo>
         </div>
         <div class="w-full h-full">
-            <PlaybackControl></PlaybackControl>
+            <PlayControl></PlayControl>
         </div>
-        <div class="w-full h-full">3</div>
+        <div class="w-full h-full">
+            <PlayTool></PlayTool>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
 import MusicInfo from './MusicInfo.vue'
-import PlaybackControl from './PlaybackControl.vue'
+import PlayControl from './PlayControl.vue'
+import PlayTool from './PlayTool.vue'
 import { usePlayerStore } from '@renderer/stores/player'
 // 播放器状态管理
 const playerStore = usePlayerStore()
