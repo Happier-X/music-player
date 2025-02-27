@@ -14,4 +14,3 @@ import Immersive from './immersive/index.vue'
 import { ref } from 'vue'
 const isNormal = ref(true)
 </script>
-<style scoped></style>
