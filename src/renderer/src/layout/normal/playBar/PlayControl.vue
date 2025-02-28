@@ -4,16 +4,27 @@
             <button class="btn btn-sm btn-circle btn-ghost">
                 <component :is="SingleLoopIcon" size="18"></component>
             </button>
-            <button class="btn btn-sm btn-circle btn-ghost">
-                <PreviousIcon
-                    size="20"
-                    @click="playerStore.playPrevious"></PreviousIcon>
+            <button
+                class="btn btn-sm btn-circle btn-ghost"
+                @click="playerStore.playPrevious">
+                <PreviousIcon size="20"></PreviousIcon>
             </button>
-            <button class="btn btn-circle">
-                <component :is="PlayIcon"></component>
+            <button
+                class="btn btn-circle"
+                @click="
+                    playerStore.isPlaying
+                        ? playerStore.pause()
+                        : playerStore.resume()
+                ">
+                <component
+                    :is="
+                        playerStore.isPlaying ? PauseIcon : PlayIcon
+                    "></component>
             </button>
-            <button class="btn btn-sm btn-circle btn-ghost">
-                <NextIcon size="20" @click="playerStore.playNext"></NextIcon>
+            <button
+                class="btn btn-sm btn-circle btn-ghost"
+                @click="playerStore.playNext">
+                <NextIcon size="20"></NextIcon>
             </button>
             <button class="btn btn-sm btn-circle btn-ghost">
                 <component :is="OrderPlayIcon" size="18"></component>
