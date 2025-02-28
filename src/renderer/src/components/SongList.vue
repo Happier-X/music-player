@@ -32,7 +32,7 @@ import { usePlayerStore } from '@renderer/stores/player'
 /**
  * 接收的属性
  */
-defineProps({
+const props = defineProps({
     list: {
         type: Array,
         default: () => []
@@ -44,6 +44,6 @@ const playerStore = usePlayerStore()
  * 播放歌曲
  */
 function handlePlay(item) {
-    playerStore.play(item)
+    playerStore.play(item, props.list)
 }
 </script>

@@ -5,13 +5,15 @@
                 <component :is="SingleLoopIcon" size="18"></component>
             </button>
             <button class="btn btn-sm btn-circle btn-ghost">
-                <PreviousIcon size="20"></PreviousIcon>
+                <PreviousIcon
+                    size="20"
+                    @click="playerStore.playPrevious"></PreviousIcon>
             </button>
             <button class="btn btn-circle">
                 <component :is="PlayIcon"></component>
             </button>
             <button class="btn btn-sm btn-circle btn-ghost">
-                <NextIcon size="20"></NextIcon>
+                <NextIcon size="20" @click="playerStore.playNext"></NextIcon>
             </button>
             <button class="btn btn-sm btn-circle btn-ghost">
                 <component :is="OrderPlayIcon" size="18"></component>
@@ -38,4 +40,7 @@ import {
     RiOrderPlayFill as OrderPlayIcon,
     RiShuffleFill as ShufflePlayIcon
 } from '@remixicon/vue'
+import { usePlayerStore } from '@renderer/stores/player'
+// 播放器状态管理
+const playerStore = usePlayerStore()
 </script>
