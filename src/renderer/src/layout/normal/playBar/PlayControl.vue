@@ -1,8 +1,18 @@
 <template>
     <div class="w-full h-full flex flex-col items-center justify-center">
         <div class="w-full h-full flex items-center justify-center gap-4">
-            <button class="btn btn-sm btn-circle btn-ghost">
-                <component :is="SingleLoopIcon" size="18"></component>
+            <button
+                class="btn btn-sm btn-circle btn-ghost"
+                @click="
+                    playerStore.setLoopMode(playerStore.loopMode === 0 ? 1 : 0)
+                ">
+                <component
+                    :is="
+                        playerStore.loopMode === 0
+                            ? ListLoopIcon
+                            : SingleLoopIcon
+                    "
+                    size="18"></component>
             </button>
             <button
                 class="btn btn-sm btn-circle btn-ghost"
@@ -26,8 +36,18 @@
                 @click="playerStore.playNext">
                 <NextIcon size="20"></NextIcon>
             </button>
-            <button class="btn btn-sm btn-circle btn-ghost">
-                <component :is="OrderPlayIcon" size="18"></component>
+            <button
+                class="btn btn-sm btn-circle btn-ghost"
+                @click="
+                    playerStore.setPlayMode(playerStore.playMode === 0 ? 1 : 0)
+                ">
+                <component
+                    :is="
+                        playerStore.playMode === 0
+                            ? OrderPlayIcon
+                            : ShufflePlayIcon
+                    "
+                    size="18"></component>
             </button>
         </div>
         <div class="w-full h-full">

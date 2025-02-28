@@ -15,6 +15,10 @@ export const usePlayerStore = defineStore('player', () => {
     const currentPlayIndex = ref(0)
     // 是否正在播放
     const isPlaying = ref(false)
+    // 循环模式，0：列表循环，1：单曲循环
+    const loopMode = ref(0)
+    // 播放模式，0：顺序播放，1：随机播放
+    const playMode = ref(0)
     /**
      * 加载歌曲
      */
@@ -28,8 +32,13 @@ export const usePlayerStore = defineStore('player', () => {
             sound.value = new Howl({
                 src: [url],
                 html5: true,
-                onend: () => {
-                    playNext()
+                onend: async () => {
+                    if (loopMode.value === 0) {
+                        playNext()
+                    } else {
+                        await loadSong(playQueue.value[currentPlayIndex.value], playQueue.value)
+                        play()
+                    }
                 }
             })
         } catch (error) {
@@ -83,6 +92,18 @@ export const usePlayerStore = defineStore('player', () => {
         sound.value?.play()
         isPlaying.value = true
     }
+    /**
+     * 设置循环模式，0：列表循环，1：单曲循环
+     */
+    function setLoopMode(mode) {
+        loopMode.value = mode
+    }
+    /**
+     * 设置播放模式，0：顺序播放，1：随机播放
+     */
+    function setPlayMode(mode) {
+        playMode.value = mode
+    }
     return {
         loadSong,
         play,
@@ -92,6 +113,10 @@ export const usePlayerStore = defineStore('player', () => {
         isPlaying,
         playQueue,
         pause,
-        resume
+        resume,
+        loopMode,
+        playMode,
+        setLoopMode,
+        setPlayMode
     }
 })
