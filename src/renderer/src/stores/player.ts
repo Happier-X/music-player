@@ -16,9 +16,9 @@ export const usePlayerStore = defineStore('player', () => {
     // 是否正在播放
     const isPlaying = ref(false)
     /**
-     * 播放歌曲
+     * 加载歌曲
      */
-    async function play(song, queue) {
+    async function loadSong(song, queue) {
         currentSongInfo.value = song
         playQueue.value = queue
         currentPlayIndex.value = queue.findIndex((item) => item.id === song.id)
@@ -32,35 +32,42 @@ export const usePlayerStore = defineStore('player', () => {
                     playNext()
                 }
             })
-            sound.value?.play()
-            isPlaying.value = true
         } catch (error) {
             console.log(error)
         }
     }
     /**
+     * 播放歌曲
+     */
+    function play() {
+        sound.value?.play()
+        isPlaying.value = true
+    }
+    /**
      * 播放下一首
      */
-    function playNext() {
+    async function playNext() {
         isPlaying.value = false
         if (currentPlayIndex.value < playQueue.value.length - 1) {
             currentPlayIndex.value++
         } else {
             currentPlayIndex.value = 0
         }
-        play(playQueue.value[currentPlayIndex.value], playQueue.value)
+        await loadSong(playQueue.value[currentPlayIndex.value], playQueue.value)
+        play()
     }
     /**
      * 播放上一首
      */
-    function playPrevious() {
+    async function playPrevious() {
         isPlaying.value = false
         if (currentPlayIndex.value > 0) {
             currentPlayIndex.value--
         } else {
             currentPlayIndex.value = playQueue.value.length - 1
         }
-        play(playQueue.value[currentPlayIndex.value], playQueue.value)
+        await loadSong(playQueue.value[currentPlayIndex.value], playQueue.value)
+        play()
     }
     /**
      * 暂停播放
@@ -77,6 +84,7 @@ export const usePlayerStore = defineStore('player', () => {
         isPlaying.value = true
     }
     return {
+        loadSong,
         play,
         playNext,
         playPrevious,
