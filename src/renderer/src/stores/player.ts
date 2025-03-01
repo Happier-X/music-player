@@ -2,15 +2,16 @@ import { api } from '@renderer/api'
 import { Howl } from 'howler'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { shuffle } from '@renderer/utils/shuffle'
 
 // 播放器状态管理
 export const usePlayerStore = defineStore('player', () => {
     // 音频播放器实例
     const sound = ref<Howl | null>(null)
     // 当前播放歌曲的信息
-    const currentSongInfo = ref(null)
+    const currentSongInfo = ref<any>(null)
     // 播放队列
-    const playQueue = ref([])
+    const playQueue = ref<any[]>([])
     // 当前播放索引
     const currentPlayIndex = ref(0)
     // 是否正在播放
@@ -20,12 +21,26 @@ export const usePlayerStore = defineStore('player', () => {
     // 播放模式，0：顺序播放，1：随机播放
     const playMode = ref(0)
     /**
+     * 设置播放队列
+     */
+    function setPlayQueue(list) {
+        if (playMode.value === 1) {
+            playQueue.value = shuffle(list)
+            currentPlayIndex.value = playQueue.value.findIndex(
+                (item) => item.id === currentSongInfo.value?.id
+            )
+        } else {
+            playQueue.value = list
+            currentPlayIndex.value = playQueue.value.findIndex(
+                (item) => item.id === currentSongInfo.value?.id
+            )
+        }
+    }
+    /**
      * 加载歌曲
      */
-    async function loadSong(song, queue) {
+    async function loadSong(song) {
         currentSongInfo.value = song
-        playQueue.value = queue
-        currentPlayIndex.value = queue.findIndex((item) => item.id === song.id)
         sound.value?.unload()
         try {
             let url = await api.getStreamUrl({ id: song.id })
@@ -36,7 +51,7 @@ export const usePlayerStore = defineStore('player', () => {
                     if (loopMode.value === 0) {
                         playNext()
                     } else {
-                        await loadSong(playQueue.value[currentPlayIndex.value], playQueue.value)
+                        await loadSong(playQueue.value[currentPlayIndex.value])
                         play()
                     }
                 }
@@ -62,7 +77,7 @@ export const usePlayerStore = defineStore('player', () => {
         } else {
             currentPlayIndex.value = 0
         }
-        await loadSong(playQueue.value[currentPlayIndex.value], playQueue.value)
+        await loadSong(playQueue.value[currentPlayIndex.value])
         play()
     }
     /**
@@ -75,7 +90,7 @@ export const usePlayerStore = defineStore('player', () => {
         } else {
             currentPlayIndex.value = playQueue.value.length - 1
         }
-        await loadSong(playQueue.value[currentPlayIndex.value], playQueue.value)
+        await loadSong(playQueue.value[currentPlayIndex.value])
         play()
     }
     /**
@@ -103,8 +118,10 @@ export const usePlayerStore = defineStore('player', () => {
      */
     function setPlayMode(mode) {
         playMode.value = mode
+        setPlayQueue(playQueue.value)
     }
     return {
+        setPlayQueue,
         loadSong,
         play,
         playNext,

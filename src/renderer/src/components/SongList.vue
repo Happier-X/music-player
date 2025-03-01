@@ -44,7 +44,8 @@ const playerStore = usePlayerStore()
  * 播放歌曲
  */
 async function handlePlay(item) {
-    await playerStore.loadSong(item, props.list)
+    await playerStore.loadSong(item)
+    playerStore.setPlayQueue(props.list)
     playerStore.play()
 }
 </script>
