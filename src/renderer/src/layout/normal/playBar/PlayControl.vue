@@ -50,13 +50,15 @@
                     size="18"></component>
             </button>
         </div>
-        <div class="w-full h-full">
+        <div class="w-full h-full flex items-center justify-center gap-2">
+            <span>00:00</span>
             <input
                 type="range"
                 min="0"
                 max="100"
                 value="50"
                 class="w-full range range-xs" />
+            <span>00:00</span>
         </div>
     </div>
 </template>
