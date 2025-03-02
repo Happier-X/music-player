@@ -58,7 +58,7 @@
                 max="100"
                 value="50"
                 class="w-full range range-xs" />
-            <span>00:00</span>
+            <span>{{ playerStore.currentSongInfo?.duration }}</span>
         </div>
     </div>
 </template>

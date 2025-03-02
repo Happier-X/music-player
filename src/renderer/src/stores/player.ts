@@ -54,7 +54,13 @@ export const usePlayerStore = defineStore('player', () => {
                         await loadSong(playQueue.value[currentPlayIndex.value])
                         play()
                     }
+                },
+                onplay: () => {
+                    console.log(sound.value.duration())
                 }
+                // onload: () => {
+                //     console.log(sound.value.duration())
+                // }
             })
         } catch (error) {
             console.log(error)

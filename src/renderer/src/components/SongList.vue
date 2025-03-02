@@ -2,7 +2,11 @@
     <div class="w-full h-full overflow-y-scroll scrollbar-hide">
         <ul class="list">
             <li
-                class="list-row"
+                :class="
+                    playerStore.currentSongInfo?.id === item.id
+                        ? 'bg-gray-100 list-row'
+                        : 'list-row'
+                "
                 v-for="(item, index) in list"
                 :key="index"
                 @dblclick="handlePlay(item)">
