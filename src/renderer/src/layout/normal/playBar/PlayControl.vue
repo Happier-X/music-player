@@ -58,6 +58,7 @@
                     :min="0"
                     :max="100"
                     :value="playerStore.progress"
+                    step="0.001"
                     @input="handleSeek"
                     class="w-full range range-xs" />
             </div>
