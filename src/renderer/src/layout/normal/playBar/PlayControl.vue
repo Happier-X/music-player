@@ -51,14 +51,17 @@
             </button>
         </div>
         <div class="w-full h-full flex items-center justify-center gap-2">
-            <span>00:00</span>
-            <input
-                type="range"
-                min="0"
-                max="100"
-                value="50"
-                class="w-full range range-xs" />
-            <span>{{ playerStore.currentSongInfo?.duration }}</span>
+            <span>{{ formatTime(playerStore.currentTime) }}</span>
+            <div class="w-full relative">
+                <input
+                    type="range"
+                    :min="0"
+                    :max="100"
+                    :value="playerStore.progress"
+                    @input="handleSeek"
+                    class="w-full range range-xs" />
+            </div>
+            <span>{{ formatTime(playerStore.duration) }}</span>
         </div>
     </div>
 </template>
@@ -76,4 +79,22 @@ import {
 import { usePlayerStore } from '@renderer/stores/player'
 // 播放器状态管理
 const playerStore = usePlayerStore()
+
+/**
+ * 格式化时间为 M:SS 格式
+ */
+function formatTime(secs: number): string {
+    const minutes = Math.floor(secs / 60) || 0
+    const seconds = Math.floor(secs - minutes * 60) || 0
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`
+}
+
+/**
+ * 处理进度条拖动
+ */
+function handleSeek(event: Event) {
+    const target = event.target as HTMLInputElement
+    const percent = parseFloat(target.value)
+    playerStore.seek(percent)
+}
 </script>
